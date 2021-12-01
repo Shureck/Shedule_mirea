@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.rtl.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.rtl.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.rtl.css">
+    <link rel="stylesheet" href="css/bootstrap-utilities.css">
+    <link rel="stylesheet" href="css/bootstrap-utilities.rtl.css">
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/bootstrap.esm.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <style>
+        .m-b-30 {
+            margin-bottom: 30px;
+        }
+        p{
+            color: #8A98AC;
+        }
+        .table-borderless td {
+            border: 0 !important;
+        }
+        .table td {
+            color: #8A98AC;
+            vertical-align: middle;
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 0.6rem;
+        }
+        .btn-primary-rgba {
+            background-color: rgba(80, 111, 228, 0.1);
+            border: none;
+            color: #506fe4;
+        }
+        .btn-success-rgba {
+            background-color: rgba(67, 209, 135, 0.1);
+            border: none;
+            color: #43d187;
+        }
+        .card {
+            border: none;
+            border-radius: 3px;
+            background-color: #ffffff;
+        }
+
+        .menu_a{
+            text-decoration: none !important;
+        }
+    </style>
+
+    <script>
+        function red(){
+            window.location.href = "/main.html"
+        }
+    </script>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.27.0/feather.min.js" integrity="sha256-xHkYry2yRjy99N8axsS5UL/xLHghksrFOGKm9HvFZIs=" crossorigin="anonymous"></script>
+
+<div class="jumbotron text-center" onclick="red()">
+    <h1>Расписание РТУ МИРЭА</h1>
+    <p>Ознакомьтесь с расписанием, найдите преподавателя или узнайте об интересных событиях</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <a class="col-sm-4 menu_a" href="shedule.html">
+            <div>
+                <h3>Расписание</h3>
+                <p>Просматривайте расписание<br>
+                    Выбирайте группу и нужный день</p>
+            </div>
+        </a>
+        <a class="col-sm-4 menu_a" href="teacher.html">
+            <div>
+                <h3>Найти преподавателя</h3>
+                <p>Ищите нужного вам преподавателя<br>
+                    Используйте возможность выбора времени, дня и предмета</p>
+            </div>
+        </a>
+        <a class="col-sm-4 menu_a" href="activity.html">
+            <div>
+                <h3>Внеклассные мероприятия</h3>
+                <p>Узнавайте о новых и интересных событиях<br>
+                    Выбирайте интересующие вас темы и время проведения</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" id="base_div">
+        <!-- Start col -->
+
+        <script>
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", "https://schedule-rtu.rtuitlab.dev/api/schedule/%D0%98%D0%9A%D0%91%D0%9E-13-19/full_schedule", false ); // false for synchronous request
+            xmlHttp.send( null );
+            jj = JSON.parse(xmlHttp.responseText)
+            weak = {
+                0: "first",
+                1: "second"
+            }
+            day = {
+                0: "monday",
+                1: "tuesday",
+                2: "wednesday",
+                3: "thursday",
+                4: "friday",
+                5: "saturday",
+            }
+            dic = {
+            }
+            for (let i = 0; i < 2; i++) {
+                for (let j = 0; j < 6; j++) {
+
+                    jj[weak[i]][day[j]].forEach(function(item, i, arr) {
+                        less = item['lesson']
+                        try {
+                            if(less['teacher'] && less['name']) {
+                                if (dic[less['teacher']] == undefined){
+                                    dic[less['teacher']] = []
+                                }
+                                if(dic[less['teacher']].indexOf(less['name']) == -1) {
+                                    dic[less['teacher']].push(less['name'])
+                                }
+                            }
+                        } catch (err) {
+                        }
+                    });
+                }
+            }
+
+            function sendMail(email){
+                window.location.href = "mailto:user@example.com?subject=Вопросы%20по%20учебной%20части";
+            }
+
+
+            for (var key in dic) {
+                console.log(dic[key])
+                var dd = document.getElementById('base_div')
+
+                var content = '<div class="col-lg-6">\n' +
+                    '            <div class="card m-b-30">\n' +
+                    '                <div class="card-body py-5">\n' +
+                    '                    <div class="row">\n' +
+                    '                        <div class="col-lg-3 text-center">\n' +
+                    '                            <img src="https://almazbur8.ru/images/unnamed.jpg" class="img-fluid mb-3" alt="user" />\n' +
+                    '                        </div>\n' +
+                    '                        <div class="col-lg-9">\n' +
+                    '                            <h4>'+key+'</h4>\n' +
+                    '                            <p>user@example.com</p>\n' +
+                    '                            <div class="button-list mt-4 mb-3">\n' +
+                    '                                <button type="button" onclick="sendMail()" class="btn btn-primary-rgba"><i class="feather icon-message-square mr-2"></i>Message</button>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="table-responsive" id="tt'+key+'\">\n'
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+                dd.innerHTML += content;
+
+                for (i=0;i<dic[key].length;i++){var ds = document.getElementById("tt"+key); ds.innerHTML += '<br>'+dic[key][i]}
+            }
+
+        </script>
+
+    </div>
+</div>
+</body>
+</html>

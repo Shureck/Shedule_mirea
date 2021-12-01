@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/bootstrap.rtl.css">
+  <link rel="stylesheet" href="css/bootstrap-grid.css">
+  <link rel="stylesheet" href="css/bootstrap-grid.rtl.css">
+  <link rel="stylesheet" href="css/bootstrap-reboot.css">
+  <link rel="stylesheet" href="css/bootstrap-reboot.rtl.css">
+  <link rel="stylesheet" href="css/bootstrap-utilities.css">
+  <link rel="stylesheet" href="css/bootstrap-utilities.rtl.css">
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/bootstrap.esm.js"></script>
+  <script src="js/bootstrap.js"></script>
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <style>
+
+    .list-timeline {
+      margin: 0;
+      padding: 5px 0;
+      position: relative
+    }
+
+    .list-timeline:before {
+      width: 1px;
+      background: #ccc;
+      position: absolute;
+      left: 6px;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      content: ''
+    }
+
+    .list-timeline .list-timeline-item {
+      margin: 0;
+      padding: 0;
+      padding-left: 24px !important;
+      position: relative
+    }
+
+    .list-timeline .list-timeline-item:before {
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border: 2px solid #ccc;
+      position: absolute;
+      left: 0;
+      top: 4px;
+      content: '';
+      border-radius: 100%;
+      -webkit-transition: all .3 ease-in-out;
+      transition: all .3 ease-in-out
+    }
+
+    .list-timeline .list-timeline-item[data-toggle=collapse] {
+      cursor: pointer
+    }
+
+    .list-timeline .list-timeline-item.active:before,
+    .list-timeline .list-timeline-item.show:before {
+      background: #ccc
+    }
+
+    .list-timeline.list-timeline-light .list-timeline-item.active:before,
+    .list-timeline.list-timeline-light .list-timeline-item.show:before,
+    .list-timeline.list-timeline-light:before {
+      background: #f8f9fa
+    }
+
+    .list-timeline .list-timeline-item.list-timeline-item-marker-middle:before {
+      top: 50%;
+      margin-top: -6px
+    }
+
+    .list-timeline.list-timeline-light .list-timeline-item:before {
+      border-color: #f8f9fa
+    }
+
+    .list-timeline.list-timeline-grey .list-timeline-item.active:before,
+    .list-timeline.list-timeline-grey .list-timeline-item.show:before,
+    .list-timeline.list-timeline-grey:before {
+      background: #e9ecef
+    }
+
+    .list-timeline.list-timeline-grey .list-timeline-item:before {
+      border-color: #e9ecef
+    }
+
+    .list-timeline.list-timeline-grey-dark .list-timeline-item.active:before,
+    .list-timeline.list-timeline-grey-dark .list-timeline-item.show:before,
+    .list-timeline.list-timeline-grey-dark:before {
+      background: #495057
+    }
+
+    .list-timeline.list-timeline-grey-dark .list-timeline-item:before {
+      border-color: #495057
+    }
+
+    .list-timeline.list-timeline-primary .list-timeline-item.active:before,
+    .list-timeline.list-timeline-primary .list-timeline-item.show:before,
+    .list-timeline.list-timeline-primary:before {
+      background: #55A79A
+    }
+
+    .list-timeline.list-timeline-primary .list-timeline-item:before {
+      border-color: #55A79A
+    }
+
+    .list-timeline.list-timeline-primary-dark .list-timeline-item.active:before,
+    .list-timeline.list-timeline-primary-dark .list-timeline-item.show:before,
+    .list-timeline.list-timeline-primary-dark:before {
+      background: #33635c
+    }
+
+    .list-timeline.list-timeline-primary-dark .list-timeline-item:before {
+      border-color: #33635c
+    }
+
+    .list-timeline.list-timeline-primary-faded .list-timeline-item.active:before,
+    .list-timeline.list-timeline-primary-faded .list-timeline-item.show:before,
+    .list-timeline.list-timeline-primary-faded:before {
+      background: rgba(85, 167, 154, .3)
+    }
+
+    .list-timeline.list-timeline-primary-faded .list-timeline-item:before {
+      border-color: rgba(85, 167, 154, .3)
+    }
+
+    .list-timeline.list-timeline-info .list-timeline-item.active:before,
+    .list-timeline.list-timeline-info .list-timeline-item.show:before,
+    .list-timeline.list-timeline-info:before {
+      background: #17a2b8
+    }
+
+    .list-timeline.list-timeline-info .list-timeline-item:before {
+      border-color: #17a2b8
+    }
+
+    .list-timeline.list-timeline-success .list-timeline-item.active:before,
+    .list-timeline.list-timeline-success .list-timeline-item.show:before,
+    .list-timeline.list-timeline-success:before {
+      background: #28a745
+    }
+
+    .list-timeline.list-timeline-success .list-timeline-item:before {
+      border-color: #28a745
+    }
+
+    .list-timeline.list-timeline-warning .list-timeline-item.active:before,
+    .list-timeline.list-timeline-warning .list-timeline-item.show:before,
+    .list-timeline.list-timeline-warning:before {
+      background: #ffc107
+    }
+
+    .list-timeline.list-timeline-warning .list-timeline-item:before {
+      border-color: #ffc107
+    }
+
+    .list-timeline.list-timeline-danger .list-timeline-item.active:before,
+    .list-timeline.list-timeline-danger .list-timeline-item.show:before,
+    .list-timeline.list-timeline-danger:before {
+      background: #dc3545
+    }
+
+    .list-timeline.list-timeline-danger .list-timeline-item:before {
+      border-color: #dc3545
+    }
+
+    .list-timeline.list-timeline-dark .list-timeline-item.active:before,
+    .list-timeline.list-timeline-dark .list-timeline-item.show:before,
+    .list-timeline.list-timeline-dark:before {
+      background: #343a40
+    }
+
+    .list-timeline.list-timeline-dark .list-timeline-item:before {
+      border-color: #343a40
+    }
+
+    .list-timeline.list-timeline-secondary .list-timeline-item.active:before,
+    .list-timeline.list-timeline-secondary .list-timeline-item.show:before,
+    .list-timeline.list-timeline-secondary:before {
+      background: #6c757d
+    }
+
+    .list-timeline.list-timeline-secondary .list-timeline-item:before {
+      border-color: #6c757d
+    }
+
+    .list-timeline.list-timeline-black .list-timeline-item.active:before,
+    .list-timeline.list-timeline-black .list-timeline-item.show:before,
+    .list-timeline.list-timeline-black:before {
+      background: #000
+    }
+
+    .list-timeline.list-timeline-black .list-timeline-item:before {
+      border-color: #000
+    }
+
+    .list-timeline.list-timeline-white .list-timeline-item.active:before,
+    .list-timeline.list-timeline-white .list-timeline-item.show:before,
+    .list-timeline.list-timeline-white:before {
+      background: #fff
+    }
+
+    .list-timeline.list-timeline-white .list-timeline-item:before {
+      border-color: #fff
+    }
+
+    .list-timeline.list-timeline-green .list-timeline-item.active:before,
+    .list-timeline.list-timeline-green .list-timeline-item.show:before,
+    .list-timeline.list-timeline-green:before {
+      background: #55A79A
+    }
+
+    .list-timeline.list-timeline-green .list-timeline-item:before {
+      border-color: #55A79A
+    }
+
+    .list-timeline.list-timeline-red .list-timeline-item.active:before,
+    .list-timeline.list-timeline-red .list-timeline-item.show:before,
+    .list-timeline.list-timeline-red:before {
+      background: #BE3E1D
+    }
+
+    .list-timeline.list-timeline-red .list-timeline-item:before {
+      border-color: #BE3E1D
+    }
+
+    .list-timeline.list-timeline-blue .list-timeline-item.active:before,
+    .list-timeline.list-timeline-blue .list-timeline-item.show:before,
+    .list-timeline.list-timeline-blue:before {
+      background: #00ADBB
+    }
+
+    .list-timeline.list-timeline-blue .list-timeline-item:before {
+      border-color: #00ADBB
+    }
+
+    .list-timeline.list-timeline-purple .list-timeline-item.active:before,
+    .list-timeline.list-timeline-purple .list-timeline-item.show:before,
+    .list-timeline.list-timeline-purple:before {
+      background: #b771b0
+    }
+
+    .list-timeline.list-timeline-purple .list-timeline-item:before {
+      border-color: #b771b0
+    }
+
+    .list-timeline.list-timeline-pink .list-timeline-item.active:before,
+    .list-timeline.list-timeline-pink .list-timeline-item.show:before,
+    .list-timeline.list-timeline-pink:before {
+      background: #CC164D
+    }
+
+    .list-timeline.list-timeline-pink .list-timeline-item:before {
+      border-color: #CC164D
+    }
+
+    .list-timeline.list-timeline-orange .list-timeline-item.active:before,
+    .list-timeline.list-timeline-orange .list-timeline-item.show:before,
+    .list-timeline.list-timeline-orange:before {
+      background: #e67e22
+    }
+
+    .list-timeline.list-timeline-orange .list-timeline-item:before {
+      border-color: #e67e22
+    }
+
+    .list-timeline.list-timeline-lime .list-timeline-item.active:before,
+    .list-timeline.list-timeline-lime .list-timeline-item.show:before,
+    .list-timeline.list-timeline-lime:before {
+      background: #b1dc44
+    }
+
+    .list-timeline.list-timeline-lime .list-timeline-item:before {
+      border-color: #b1dc44
+    }
+
+    .list-timeline.list-timeline-blue-dark .list-timeline-item.active:before,
+    .list-timeline.list-timeline-blue-dark .list-timeline-item.show:before,
+    .list-timeline.list-timeline-blue-dark:before {
+      background: #34495e
+    }
+
+    .list-timeline.list-timeline-blue-dark .list-timeline-item:before {
+      border-color: #34495e
+    }
+
+    .list-timeline.list-timeline-red-dark .list-timeline-item.active:before,
+    .list-timeline.list-timeline-red-dark .list-timeline-item.show:before,
+    .list-timeline.list-timeline-red-dark:before {
+      background: #a10f2b
+    }
+
+    .list-timeline.list-timeline-red-dark .list-timeline-item:before {
+      border-color: #a10f2b
+    }
+
+    .list-timeline.list-timeline-brown .list-timeline-item.active:before,
+    .list-timeline.list-timeline-brown .list-timeline-item.show:before,
+    .list-timeline.list-timeline-brown:before {
+      background: #91633c
+    }
+
+    .list-timeline.list-timeline-brown .list-timeline-item:before {
+      border-color: #91633c
+    }
+
+    .list-timeline.list-timeline-cyan-dark .list-timeline-item.active:before,
+    .list-timeline.list-timeline-cyan-dark .list-timeline-item.show:before,
+    .list-timeline.list-timeline-cyan-dark:before {
+      background: #008b8b
+    }
+
+    .list-timeline.list-timeline-cyan-dark .list-timeline-item:before {
+      border-color: #008b8b
+    }
+
+    .list-timeline.list-timeline-yellow .list-timeline-item.active:before,
+    .list-timeline.list-timeline-yellow .list-timeline-item.show:before,
+    .list-timeline.list-timeline-yellow:before {
+      background: #D4AC0D
+    }
+
+    .list-timeline.list-timeline-yellow .list-timeline-item:before {
+      border-color: #D4AC0D
+    }
+
+    .list-timeline.list-timeline-slate .list-timeline-item.active:before,
+    .list-timeline.list-timeline-slate .list-timeline-item.show:before,
+    .list-timeline.list-timeline-slate:before {
+      background: #5D6D7E
+    }
+
+    .list-timeline.list-timeline-slate .list-timeline-item:before {
+      border-color: #5D6D7E
+    }
+
+    .list-timeline.list-timeline-olive .list-timeline-item.active:before,
+    .list-timeline.list-timeline-olive .list-timeline-item.show:before,
+    .list-timeline.list-timeline-olive:before {
+      background: olive
+    }
+
+    .list-timeline.list-timeline-olive .list-timeline-item:before {
+      border-color: olive
+    }
+
+    .list-timeline.list-timeline-teal .list-timeline-item.active:before,
+    .list-timeline.list-timeline-teal .list-timeline-item.show:before,
+    .list-timeline.list-timeline-teal:before {
+      background: teal
+    }
+
+    .list-timeline.list-timeline-teal .list-timeline-item:before {
+      border-color: teal
+    }
+
+    .list-timeline.list-timeline-green-bright .list-timeline-item.active:before,
+    .list-timeline.list-timeline-green-bright .list-timeline-item.show:before,
+    .list-timeline.list-timeline-green-bright:before {
+      background: #2ECC71
+    }
+
+    .list-timeline.list-timeline-green-bright .list-timeline-item:before {
+      border-color: #2ECC71
+    }
+  </style>
+
+
+  <style>
+    .widget {
+      background: #fff;
+      margin-bottom: .75rem;
+      display: block;
+      position: relative;
+      box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+    }
+    .widget .widget-header,
+    .widget-reminder-content,
+    .widget-reminder-time,
+    a.widget-header-title {
+      padding: 0.625rem;
+    }
+    .widget-chat-message:after,
+    .widget-chat-message:before,
+    .widget-reminder-container:after,
+    .widget-reminder-container:before {
+      display: table;
+      content: "";
+      clear: both;
+    }
+    .widget-footer.with-border,
+    .widget-reminder-container + .widget-reminder-container {
+      border-top: 1px solid #efeff4;
+    }
+    .widget-footer.with-bg,
+    .widget-header.with-bg {
+      background: #efeff4;
+    }
+    .widget-header.with-border {
+      border-bottom: 1px solid #efeff4;
+    }
+    .widget-reminder-header {
+      background: #efeff4;
+      padding: 0.625rem;
+      font-size: 0.925rem;
+      font-weight: 700;
+      color: #8a8a8f;
+    }
+    .widget-reminder-container {
+      position: relative;
+    }
+    .inverse-mode .widget-reminder-container + .widget-reminder-container {
+      border-color: #333;
+    }
+    .inverse-mode .widget-reminder-header {
+      background: #212121;
+    }
+    .widget-reminder-time {
+      width: 5rem;
+      float: left;
+      text-align: right;
+      font-size: 0.825rem;
+    }
+    .widget-reminder-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 5rem;
+      width: 0.125rem;
+      background: #efeff4;
+    }
+    .widget-reminder-content {
+      margin-left: 5.125rem;
+    }
+    .widget-header-title {
+      margin: 0;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .widget .widget-title, .widget .widget-title a {
+      font-size: .95rem;
+      color: #000;
+      line-height: 1rem;
+    }
+    .widget .widget-title {
+      font-weight: 600;
+      margin: 0;
+    }
+    .widget-desc, .widget-desc a {
+      font-size: .8875rem;
+      line-height: 1rem;
+      color: #8A8A8F;
+      font-weight: 500;
+    }
+    .img-circle {
+      border-radius: 50%;
+    }
+
+    .pull-left {
+      float: left!important;
+    }
+    .pull-right {
+      float: right!important;
+    }
+    .m-t-15 {
+      margin-top: 15px!important;
+    }
+
+    .m-r-5 {
+      margin-right: 5px!important;
+    }
+
+    .widget .widget-header, .widget-reminder-content, .widget-reminder-time, a.widget-header-title {
+      padding: .625rem;
+    }
+  </style>
+
+  <style>
+    .post .article-v2 {
+      padding: 0 15px;
+    }
+
+    .post .article-v2 .entry-title {
+      font-size: 16px;
+      color: #666666;
+      font-weight: 600;
+    }
+
+    .post .article-v2 .article-header {
+      margin-bottom: 15px;
+    }
+
+    .post .article-v2 .article-content-main {
+      -webkit-box-shadow: 1px 0px 20px 1px rgba(0, 0, 0, 0.15);
+      box-shadow: 1px 0px 20px 1px rgba(0, 0, 0, 0.15);
+      padding: 30px;
+      position: relative;
+      background: #fff;
+      margin-top: -75px;
+    }
+
+    @media only screen and (max-width: 1024px) {
+      .post .article-v2 .article-content-main {
+        padding: 15px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .post .article-v2 .article-content p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .post .article-v2 .article-thumb {
+      position: relative;
+      left: 25px;
+      margin-bottom: 0;
+    }
+
+    .post .article-v2 .article-footer {
+      border-top: 1px solid #ebebeb;
+      padding-top: 15px;
+      margin-top: 20px;
+    }
+
+    .post .article-v2 .article-footer .more-link {
+      color: #ffa800;
+    }
+
+    .post .article-v2 .article-footer .footer-meta a {
+      color: #aaa;
+      font-size: 15px;
+      margin-right: 5px;
+    }
+
+    .post .article-v2 .article-footer .footer-meta a i {
+      font-size: 16px;
+      margin-left: 2px;
+    }
+
+    .menu_a{
+      text-decoration: none !important;
+    }
+
+    .box {
+      position: relative;
+      overflow:hidden;
+      width:350px;
+      height:150px;
+    }
+
+    .box img {
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:350px;
+      height:150px;
+      object-fit:cover;
+    }
+  </style>
+
+  <script>
+    function red(){
+      window.location.href = "/main.html"
+    }
+  </script>
+
+</head>
+<body>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+
+<div class="jumbotron text-center" onclick="red()">
+  <h1>Расписание РТУ МИРЭА</h1>
+  <p>Ознакомьтесь с расписанием, найдите преподавателя или узнайте об интересных событиях</p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <a class="col-sm-4 menu_a" href="shedule.html">
+      <div>
+        <h3>Расписание</h3>
+        <p>Просматривайте расписание<br>
+          Выбирайте группу и нужный день</p>
+      </div>
+    </a>
+    <a class="col-sm-4 menu_a" href="teacher.html">
+      <div>
+        <h3>Найти преподавателя</h3>
+        <p>Ищите нужного вам преподавателя<br>
+          Используйте возможность выбора времени, дня и предмета</p>
+      </div>
+    </a>
+    <a class="col-sm-4 menu_a" href="activity.html">
+      <div>
+        <h3>Внеклассные мероприятия</h3>
+        <p>Узнавайте о новых и интересных событиях<br>
+          Выбирайте интересующие вас темы и время проведения</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-6 col-xl-4">
+          <article class="post">
+            <div class="article-v2">
+              <figure class="article-thumb">
+                <a href="#">
+                  <div class="box">
+                    <img src="https://sun9-88.userapi.com/impg/GSeK8WviP6n-sHzVVQNraTbj1n5-OvjKuMiI0A/yIurXnsP5MU.jpg?size=800x426&quality=96&sign=7da6e58ffcda93f5566ad0284c320686&type=album" width="90%" height="90%" alt="blog image" />
+                  </div>
+                </a>
+              </figure>
+              <!-- /.article-thumb -->
+              <div class="article-content-main">
+                <div class="article-header">
+                  <h2 class="entry-title">3–5 декабря Акселератор «Транспортные инновации Москвы» проведёт онлайн-хакатон по кибербезопасности Moscow Secure Traffic.</h2>
+                  <div class="entry-meta">
+                    <div class="entry-date">26 ноя 16:01</div>
+                    <!-- /.entry-date -->
+                    <div class="entry-cat">
+                      <a href="#">МИРЭА — Российский технологический университет</a>
+                    </div>
+                    <!--  /.entry-cat -->
+                  </div>
+                  <!-- /.entry-meta -->
+                </div>
+                <!-- /.article-header -->
+                <div class="article-content">
+                  <p>Участникам предстоит решить один из двух кейсов, посвящённых поиску нестандартных решений в области кибербезопасности сервисов...</p>
+                </div>
+                <!--  /.article-content -->
+                <div class="article-footer">
+                  <div class="row">
+                    <div class="col-6 text-left footer-link">
+                      <a href="#" class="more-link">Открыть запись</a>
+                    </div>
+                  </div>
+                  <!--  /.row -->
+                </div>
+                <!--  /.article-footer -->
+              </div>
+              <!--  /.article-content-main -->
+            </div>
+            <!--  /.article-v2 -->
+          </article>
+          <!--  /.post -->
+        </div>
+        <!--  /.col-md-6 -->
+
+        <div class="col-md-6 col-xl-4">
+          <article class="post">
+            <div class="article-v2">
+              <figure class="article-thumb">
+                <a href="#">
+                  <div class="box">
+                    <img src="https://sun9-18.userapi.com/impg/AOjqhma7dBvx-JKFhBGAOAApUS_8ZZzk3b8iig/E5m2l6lgLVI.jpg?size=960x540&quality=96&sign=08d42ae8b8cdf6790a2928f6e99b23a8&type=album" width="90%" height="90%" alt="blog image" />
+                  </div>
+                </a>
+              </figure>
+              <!-- /.article-thumb -->
+              <div class="article-content-main">
+                <div class="article-header">
+                  <h2 class="entry-title">🎉 RTUITLab 5 лет! 🎉</h2>
+                  <div class="entry-meta">
+                    <div class="entry-date">27 ноя 15:41</div>
+                    <!-- /.entry-date -->
+                    <div class="entry-cat">
+                      <a href="#">RTUITLab</a>
+                    </div>
+                    <!--  /.entry-cat -->
+                  </div>
+                  <!-- /.entry-meta -->
+                </div>
+                <!-- /.article-header -->
+                <div class="article-content">
+                  <p>Ровно пять лет назад лаборатория, а точнее первые ее участники (ведь как такового подразделения тогда еще не было), выиграли свой первый хакатон,. Мы решили отсчитывать свою историю от этого момента – 27 ноября 2016 года, хакатона «Технологии Возможностей 2.0»...</p>
+                </div>
+                <!--  /.article-content -->
+                <div class="article-footer">
+                  <div class="row">
+                    <div class="col-6 text-left footer-link">
+                      <a href="#" class="more-link">Открыть запись</a>
+                    </div>
+                  </div>
+                  <!--  /.row -->
+                </div>
+                <!--  /.article-footer -->
+              </div>
+              <!--  /.article-content-main -->
+            </div>
+            <!--  /.article-v2 -->
+          </article>
+          <!--  /.post -->
+        </div>
+        <!--  /.col-md-6 -->
+
+        <div class="col-md-6 col-xl-4">
+          <article class="post">
+            <div class="article-v2">
+              <figure class="article-thumb">
+                <a href="#">
+                  <div class="box">
+                    <img src="https://sun9-54.userapi.com/impg/lFGo2GKxD0LVl9oui4CdmX_uOtWrxcJQH10sJQ/DqXRDJbhxgk.jpg?size=1362x1021&quality=96&sign=51539a26f1385b06ac9736b2881decd0&type=album" width="85%" height="85%" alt="blog image" />
+                  </div>
+                </a>
+              </figure>
+              <!-- /.article-thumb -->
+              <div class="article-content-main">
+                <div class="article-header">
+                  <h2 class="entry-title">Мы подготовили две вакансии, которые помогут тебе получить опыт работы в команде, стажировку в крупной компании или постоянную работу.</h2>
+                  <div class="entry-meta">
+                    <div class="entry-date">24 ноя 9:30</div>
+                    <!-- /.entry-date -->
+                    <div class="entry-cat">
+                      <a href="#">Институт информационных технологий</a>
+                    </div>
+                    <!--  /.entry-cat -->
+                  </div>
+                  <!-- /.entry-meta -->
+                </div>
+                <!-- /.article-header -->
+                <div class="article-content">
+                  <p>Во-первых «Профстажировки 2.0» – новый механизм взаимодействия студента образовательной организации и работодателя, задействующий студенческие работы и стажировки в качестве социального лифта для...</p>
+                </div>
+                <!--  /.article-content -->
+                <div class="article-footer">
+                  <div class="row">
+                    <div class="col-6 text-left footer-link">
+                      <a href="#" class="more-link">Открыть запись</a>
+                    </div>
+                    <!--  /.col-6 -->
+                  </div>
+                  <!--  /.row -->
+                </div>
+                <!--  /.article-footer -->
+              </div>
+              <!--  /.article-content-main -->
+            </div>
+            <!--  /.article-v2 -->
+          </article>
+          <!--  /.post -->
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <article class="post">
+            <div class="article-v2">
+              <figure class="article-thumb">
+                <a href="#">
+                  <div class="box">
+                    <img src="https://sun9-78.userapi.com/impg/ZXSOOBYf4NQKz613VcG0HlKNHE0VZ8KEPSnZmQ/AHlIUx-ylhQ.jpg?size=1362x1021&quality=96&sign=be6216b72d37baabc34e58fd49d3a389&type=album" width="90%" height="90%" alt="blog image" />
+                  </div>
+                </a>
+              </figure>
+              <!-- /.article-thumb -->
+              <div class="article-content-main">
+                <div class="article-header">
+                  <h2 class="entry-title">Приглашаем студентов старших курсов Института информационных технологий пройти собеседование для дальнейшего трудоустройства.</h2>
+                  <div class="entry-meta">
+                    <div class="entry-date">18 ноя 13:48</div>
+                    <!-- /.entry-date -->
+                    <div class="entry-cat">
+                      <a href="#">Институт информационных технологий</a>
+                    </div>
+                    <!--  /.entry-cat -->
+                  </div>
+                  <!-- /.entry-meta -->
+                </div>
+                <!-- /.article-header -->
+                <div class="article-content">
+                  <p>Список желательных навыков:<br>
+                    • знание Linux и умение работы в нём;...</p>
+                </div>
+                <!--  /.article-content -->
+                <div class="article-footer">
+                  <div class="row">
+                    <div class="col-6 text-left footer-link">
+                      <a href="#" class="more-link">Открыть запись</a>
+                    </div>
+                  </div>
+                  <!--  /.row -->
+                </div>
+                <!--  /.article-footer -->
+              </div>
+              <!--  /.article-content-main -->
+            </div>
+            <!--  /.article-v2 -->
+          </article>
+          <!--  /.post -->
+        </div>
+
+
+        <!--  /.col-md-6 -->
+      </div>
+      <!--  /.blog-carousel -->
+    </div>
+    <!--  /.col-12 -->
+  </div>
+  <!--  /.row -->
+</div>
+
+</body>
+</html>
